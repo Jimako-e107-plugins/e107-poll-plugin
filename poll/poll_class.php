@@ -10,8 +10,10 @@
 
 if (!defined('e107_INIT')) { exit; }
 
-e107::includeLan(e_PLUGIN.'poll/languages/'.e_LANGUAGE.'.php');
-e107::includeLan(e_LANGUAGEDIR.e_LANGUAGE.'/admin/lan_admin.php');
+e107::plugLan('poll', null);
+e107::coreLan('top', null);
+e107::coreLan('admin', true);
+ 
 define('POLLCLASS', TRUE);
 define('POLL_MODE_COOKIE', 0);
 define('POLL_MODE_IP', 1);
@@ -439,33 +441,8 @@ class poll
 
 		$template = array();
 
-		if(deftrue('BOOTSTRAP'))
-		{
-			$template = ($type == 'forum') ? e107::getTemplate('forum','forum_poll') : e107::getTemplate('poll');
-		}
-		else
-		{
-				/* get template */
-			if (file_exists(THEME.'poll_template.php'))
-			{
-				require(THEME.'poll_template.php');
-			}
-			else if (!isset($POLL_NOTVOTED_START))
-			{
-			    require(e_PLUGIN.'poll/templates/poll_template.php');
-			}
-
-			$template['form']['start'] = $POLL_NOTVOTED_START ;
-			$template['form']['item'] = $POLL_NOTVOTED_LOOP;
-			$template['form']['end'] = 	$POLL_NOTVOTED_END;
-			$template['results']['start'] = $POLL_VOTED_START;
-			$template['results']['item'] = $POLL_VOTED_LOOP;
-			$template['results']['end'] = $POLL_VOTED_END;
-			$template['denied']['start'] = $POLL_DISALLOWED_START;
-			$template['denied']['item'] = $POLL_DISALLOWED_LOOP ;
-			$template['denied']['end'] = $POLL_DISALLOWED_END ;
-		}
-
+		$template = ($type == 'forum') ? e107::getTemplate('forum','forum_poll') : e107::getTemplate('poll');
+		
 
 		$sc->setVars($pollArray);
 
@@ -1093,6 +1070,3 @@ e107::js('inline', '
 		document.cookie = name+"="+value+expires+"; path=/";
 	}
 		');*/
-
-
-

@@ -17,7 +17,9 @@ if (!getperms("P") || !e107::isInstalled('poll'))
 }
 $e_sub_cat = 'poll';
 
-e107::includeLan(e_PLUGIN.'poll/languages/'.e_LANGUAGE.'_admin_poll.php');
+//e107::plugLan('poll', e_LANGUAGE . '_admin_poll');
+
+ 
 require_once(e_ADMIN."auth.php");
 require_once(e_PLUGIN."poll/poll_class.php");
 require_once(e_HANDLER."userclass_class.php");
@@ -28,7 +30,7 @@ require_once(e_HANDLER."form_handler.php"); // FIXME using 'form' instead of 'e_
 	$_POST = strip_if_magic($_POST);
 }*/
 
-$rs = new form;
+ 
 $poll = new poll;
 $frm = e107::getForm();
 $mes = e107::getMessage();

@@ -33,8 +33,8 @@ if(!isset($poll) || !is_object($poll))
 
 if(!defined("POLL_1"))
 {
-	/* if menu is being called from comments, lan files have to be included manually ... */
-	e107::includeLan(e_PLUGIN."poll/languages/".e_LANGUAGE.".php");
+  /* if menu is being called from comments, lan files have to be included manually ... */
+  e107::plugLan('poll', null);
 }
 
 if (empty($poll_to_show))
@@ -59,5 +59,3 @@ ORDER BY p.poll_datestamp DESC LIMIT 0,1
 $poll->remove_poll_cookies();
 
 $poll->render_poll($query, $pollType, $pollMode);
-
-
